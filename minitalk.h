@@ -6,7 +6,7 @@
 /*   By: cdalla-s <cdalla-s@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/21 16:23:34 by cdalla-s      #+#    #+#                 */
-/*   Updated: 2022/03/25 12:25:26 by cdalla-s      ########   odam.nl         */
+/*   Updated: 2022/04/07 12:50:32 by cdalla-s      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define MINITALK_H
 
 # include "ft_printf/ft_printf.h"
-# include <stdio.h>
 # include <signal.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -27,7 +26,7 @@ typedef struct s_message
 	int					index;
 	int					c_pid;
 	struct sigaction	new;
-	char				message[200];
+	char				message[201];
 }				t_message;
 
 //UTILS

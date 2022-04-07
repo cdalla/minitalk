@@ -4,6 +4,8 @@ NAME2 = client
 
 PRINTF = ft_printf/libftprintf.a
 
+CC = gcc
+
 CFLAGS = -Wall -Werror -Wextra
 
 SRC1 =	server.c\
@@ -15,10 +17,10 @@ SRC2 =	client.c\
 all: $(NAME1) $(NAME2)
 	
 $(NAME1): $(PRINTF) $(SRC1)
-	$(CC) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@
 
 $(NAME2): $(PRINTF) $(SRC2)
-	$(CC) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@
 
 $(PRINTF):
 	make -C ft_printf

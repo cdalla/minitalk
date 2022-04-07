@@ -6,20 +6,20 @@
 /*   By: cdalla-s <cdalla-s@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/25 11:09:27 by cdalla-s      #+#    #+#                 */
-/*   Updated: 2022/03/25 12:20:55 by cdalla-s      ########   odam.nl         */
+/*   Updated: 2022/04/07 12:48:09 by cdalla-s      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"	
 
-t_message	g_g_str;
+t_message	g_str;
 
 void	sig_handler_info(int signum, siginfo_t *info, void *ucontext)
 {
 	(void) ucontext;
 	g_str.c <<= 1;
 	if (signum == SIGUSR2)
-		g_g_str.c |= 1;
+		g_str.c |= 1;
 	g_str.index += 1;
 	g_str.c_pid = info->si_pid;
 }
@@ -27,7 +27,7 @@ void	sig_handler_info(int signum, siginfo_t *info, void *ucontext)
 void	print_message(void)
 {
 	g_str.message[g_str.i] = '\0';
-	write(1, g_str.message, ft_g_strlen(g_str.message));
+	write(1, g_str.message, ft_strlen(g_str.message));
 	g_str.i = -1;
 }
 
@@ -43,9 +43,9 @@ void	loop(void)
 			write(1, "\n", 1);
 			kill(g_str.c_pid, SIGUSR1);
 		}
-		if (g_str.i < 198 && g_str.c != 0)
+		if (g_str.i < 200 && g_str.c != 0)
 			g_str.message[g_str.i] = g_str.c;
-		if (g_str.i == 198)
+		if (g_str.i == 200)
 			print_message();
 		g_str.i += 1;
 		g_str.c = 0;
