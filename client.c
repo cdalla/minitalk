@@ -6,7 +6,7 @@
 /*   By: cdalla-s <cdalla-s@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/25 11:09:32 by cdalla-s      #+#    #+#                 */
-/*   Updated: 2022/04/07 13:23:31 by cdalla-s      ########   odam.nl         */
+/*   Updated: 2022/04/07 15:51:42 by cdalla-s      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,15 @@ void	send_char(char c, int pid)
 	while (b)
 	{
 		if (b & c)
-			kill(pid, SIGUSR2);
+		{
+			if (kill(pid, SIGUSR2))
+				exit_error();
+		}
 		else
-			kill(pid, SIGUSR1);
+		{
+			if (kill(pid, SIGUSR1))
+				exit_error();
+		}
 		usleep(100);
 		b >>= 1;
 	}
@@ -44,6 +50,8 @@ int	main(int argc, char **argv)
 	if (argc < 3)
 		return (0);
 	s_pid = ft_atoi(argv[1]);
+	if (s_pid == 0)
+		exit_error();
 	while (1)
 	{	
 		signal(SIGUSR1, print);

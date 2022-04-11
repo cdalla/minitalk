@@ -6,7 +6,7 @@
 /*   By: cdalla-s <cdalla-s@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/25 11:09:27 by cdalla-s      #+#    #+#                 */
-/*   Updated: 2022/04/07 12:48:09 by cdalla-s      ########   odam.nl         */
+/*   Updated: 2022/04/07 15:51:04 by cdalla-s      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,18 @@ void	print_message(void)
 
 void	loop(void)
 {
-	sigaction(SIGUSR1, &g_str.new, NULL);
-	sigaction(SIGUSR2, &g_str.new, NULL);
+	if (sigaction(SIGUSR1, &g_str.new, NULL))
+		exit_error();
+	if (sigaction(SIGUSR2, &g_str.new, NULL))
+		exit_error();
 	if (g_str.index == 8)
 	{	
 		if (g_str.c == 0)
 		{
 			print_message();
 			write(1, "\n", 1);
-			kill(g_str.c_pid, SIGUSR1);
+			if (kill(g_str.c_pid, SIGUSR1))
+				exit_error();
 		}
 		if (g_str.i < 200 && g_str.c != 0)
 			g_str.message[g_str.i] = g_str.c;
