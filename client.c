@@ -6,7 +6,7 @@
 /*   By: cdalla-s <cdalla-s@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/25 11:09:32 by cdalla-s      #+#    #+#                 */
-/*   Updated: 2022/04/07 15:51:42 by cdalla-s      ########   odam.nl         */
+/*   Updated: 2022/04/13 12:03:58 by cdalla-s      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ int	main(int argc, char **argv)
 	s_pid = ft_atoi(argv[1]);
 	if (s_pid == 0)
 		exit_error();
+	signal(SIGUSR1, print);
 	while (1)
 	{	
-		signal(SIGUSR1, print);
 		while (argv[2][i])
 		{
 			send_char(argv[2][i], s_pid);
 			i++;
-		}	
+		}
 		send_char(0, s_pid);
 	}
 	return (0);

@@ -6,12 +6,13 @@
 /*   By: cdalla-s <cdalla-s@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/21 16:23:34 by cdalla-s      #+#    #+#                 */
-/*   Updated: 2022/04/07 15:50:40 by cdalla-s      ########   odam.nl         */
+/*   Updated: 2022/04/13 11:32:34 by cdalla-s      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINITALK_H
 # define MINITALK_H
+# define BUFFER_SIZE 201
 
 # include "ft_printf/ft_printf.h"
 # include <signal.h>
@@ -22,11 +23,11 @@
 typedef struct s_message
 {
 	unsigned char		c;
-	int					i;
-	int					index;
-	int					c_pid;
+	int					buff_i;
+	int					bit_i;
+	int					client_pid;
 	struct sigaction	new;
-	char				message[201];
+	char				message[BUFFER_SIZE];
 }				t_message;
 
 //UTILS
